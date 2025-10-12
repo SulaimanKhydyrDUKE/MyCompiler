@@ -1,0 +1,40 @@
+MyLang - lanuage that we will be implementing in this compiler
+
+MyLang has following data strucutres:
+    Integer - 4-byte signed integer
+    String - char[] array with 1-byte per member of this structure
+    
+    Matrix = a 2D array of Integers with following properties/calls:
+        isInvertible() - returns #t if invertible, #f otherwise
+        hasNull()      - returns #t if has nullspace, #f otherwise
+        Transpose()    - for M x N matrix, returns a transposed N x M matrix
+        Reduce()       - returns reduced Echelon of the matrix
+
+
+MyLang has following operations:
+    +  --> adds two data units of the same type
+    -  --> substracts two integers
+    *  --> multiplies two integers 
+    /  --> divides two integers, except by zero
+
+MyLang has following function calls:
+    let a = EXPR      --> initualizes a data unit, makes them immutable
+    if()/else         --> if and else statements that return #t or #f
+    while(condition)  --> a loop that runs, checking the condition state at every iteration
+    print()           --> prints out whatever is inside the call
+
+My Lang has following EXPR types:
+    Literals:              --> 123, "Hello worls"
+    Variables:             --> a, b, z    
+    Binary Expressions     --> a + b, b = z;
+    grouped: (EXPR)
+
+Evaluation rules:
+    EXPRessions return values
+    statements are evaluated in order
+    "let" binds values to names 
+
+Limits:
+    Data unites are immutable
+    String length is limited to 256 chars
+
