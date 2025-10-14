@@ -80,5 +80,7 @@ class Lexer:
                 my_tokens.append = R_PAREN
             elif self.current_char == "-":
                 my_tokens.append = MIN
+            elif self.current_char == "[":
+                my_tokens.append = lef
             
-            
+#helllo 
