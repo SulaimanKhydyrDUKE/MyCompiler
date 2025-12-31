@@ -117,8 +117,10 @@ class Lexer:
             result += self.current_char
             self.advance()
         
-        if self.current_char == '"':
-            self.advance() # skip closing quote
+        if self.current_char is None:
+            raise Exception(f"Unterminated string at line {self.line}, column {start_column}")
+
+        self.advance() # skip closing quote
             
         if len(result) > 256:
             raise Exception(f"String length exceeds 256 chars at line {self.line}, column {start_column}")
