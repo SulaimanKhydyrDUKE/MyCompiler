@@ -70,6 +70,15 @@ class Interpreter:
         else:
             print(value)
 
+    def visit_ExpressionStatement(self, node):
+        self.interpret(node.expression)
+
+    def visit_UnaryExpression(self, node):
+        value = self.interpret(node.right)
+        if node.operator == "-":
+            return -value
+        raise Exception(f"Unknown unary operator {node.operator}")
+
     def visit_Block(self, node):
         previous_env = self.environment
         self.environment = Environment(previous_env)
