@@ -5,16 +5,20 @@ A small compiler front end and tree-walking interpreter for **MyLang**, a toy la
 ## Pipeline
 
 ```
-source ──▶ Lexer ──▶ Parser ──▶ TypeChecker ──▶ Interpreter
-           lexer.py   parser.py   typecheck.py    interpreter.py (+ runtime.py for Matrix)
+source ──▶ Lexer ──▶ Parser ──▶ TypeChecker ──▶ Interpreter        (run)
+           lexer.py   parser.py   typecheck.py    interpreter.py + runtime.py
+                                              └─▶ PythonCodegen      (--emit)
+                                                  codegen.py
 ```
 
-`codegen.py` is reserved for a future code-generation backend and is currently empty.
+`codegen.py` is a first backend: it emits the checked program as Python source that calls the same `runtime.Matrix`, so the generated program prints exactly what the interpreter prints. Block scoping is preserved by renaming each `let` to a fresh Python name.
 
 ## Run
 
 ```bash
-python -m mylang.driver Examples/matrix.ml
+python -m mylang.driver Examples/matrix.ml                  # interpret
+python -m mylang.driver Examples/matrix.ml --emit out.py    # compile to Python
+PYTHONPATH=. python out.py                                  # the output imports mylang.runtime
 ```
 
 ## Test
