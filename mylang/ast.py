@@ -139,3 +139,11 @@ class MemberCallExpression(Expression):
     def __repr__(self):
         return f"MemberCallExpression({self.object}, {self.method}, {self.arguments})"
 
+
+class ExpressionStatement(Statement):
+    def __init__(self, expression, line, column):
+        super().__init__(line, column)
+        self.expression = expression
+
+    def __repr__(self):
+        return f"ExpressionStatement({self.expression})"

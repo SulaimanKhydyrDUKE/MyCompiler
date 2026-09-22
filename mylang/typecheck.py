@@ -83,6 +83,16 @@ class TypeChecker:
         self.check(node.expression)
         return Type.VOID
 
+    def check_ExpressionStatement(self, node):
+        self.check(node.expression)
+        return Type.VOID
+
+    def check_UnaryExpression(self, node):
+        operand_type = self.check(node.right)
+        if node.operator == "-" and operand_type == Type.INTEGER:
+            return Type.INTEGER
+        raise Exception(f"Invalid type for unary '{node.operator}': {operand_type} at line {node.line}")
+
     def check_Block(self, node):
         previous_table = self.symbol_table
         self.symbol_table = SymbolTable(previous_table)
